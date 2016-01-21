@@ -1,61 +1,27 @@
-/*
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- */
-
 //
-//  MainViewController.h
-//  Gajago
+//  PaymentWebViewController.m
+//  NicePayAppSample
 //
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
+//  Created by  on 12. 4. 27..
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "PaymentWebViewController.h"
+#import "AppDelegate.h"
 
-@implementation MainViewController
-
+@implementation PaymentWebViewController
 @synthesize bankPayUrlString;
 
 enum AppStoreLinkTag {
-    app_link_isp,
-    app_link_bank,
+	app_link_isp,
+	app_link_bank,
 }AppStoreLinkTag;
 
-- (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Uncomment to override the CDVCommandDelegateImpl used
-        // _commandDelegate = [[MainCommandDelegate alloc] initWithViewController:self];
-        // Uncomment to override the CDVCommandQueue used
-        // _commandQueue = [[MainCommandQueue alloc] initWithViewController:self];
-    }
-    return self;
-}
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Uncomment to override the CDVCommandDelegateImpl used
-        // _commandDelegate = [[MainCommandDelegate alloc] initWithViewController:self];
-        // Uncomment to override the CDVCommandQueue used
-        // _commandQueue = [[MainCommandQueue alloc] initWithViewController:self];
+        // Custom initialization
     }
     return self;
 }
@@ -64,14 +30,12 @@ enum AppStoreLinkTag {
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-
+    
     // Release any cached data, images, etc that aren't in use.
 }
 
-
 - (void) requestBankPayResult:(NSString*)bodyString
 {
-    
     //bankPayUrlString 계좌이체 인증 결과 url
     NSURL *url = [NSURL URLWithString: bankPayUrlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
@@ -88,14 +52,13 @@ enum AppStoreLinkTag {
     [self.webView loadRequest: request];
 }
 
-
 #pragma mark View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated
 {
     // View defaults to full size.  If you want to customize the view's size, or its subviews (e.g. webView),
     // you can do so here.
-
+    
     [super viewWillAppear:animated];
 }
 
@@ -118,22 +81,13 @@ enum AppStoreLinkTag {
     return [super shouldAutorotateToInterfaceOrientation:interfaceOrientation];
 }
 
-/* Comment out the block below to over-ride */
-
-/*
-- (UIWebView*) newCordovaViewWithFrame:(CGRect)bounds
-{
-    return[super newCordovaViewWithFrame:bounds];
-}
-*/
-
 #pragma mark UIWebDelegate implementation
 
 - (void)webViewDidFinishLoad:(UIWebView*)theWebView
 {
     // Black base color for background matches the native apps
     theWebView.backgroundColor = [UIColor blackColor];
-
+    
     return [super webViewDidFinishLoad:theWebView];
 }
 
@@ -151,11 +105,11 @@ enum AppStoreLinkTag {
 }
 
 /*
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-
-    NSLog(@"TEST");
-    
-}
+ - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+ 
+ NSLog(@"TEST");
+ 
+ }
  */
 
 
@@ -217,67 +171,37 @@ enum AppStoreLinkTag {
 }
 
 
-- (void) showAlertViewWithMessage:(NSString*)msg tagNum:(NSInteger)tag {
-    UIAlertView *v = [[UIAlertView alloc] initWithTitle:@"알림"
-                                                message:msg
-                                               delegate:self
-                                      cancelButtonTitle:@"확인"
-                                      otherButtonTitles:nil];
-    v.tag = tag;
-    [v show];
+- (void) showAlertViewWithMessage:(NSString*)msg tagNum:(NSInteger)tag
+{
+	
+	UIAlertView *v = [[UIAlertView alloc] initWithTitle:@"알림"
+												message:msg
+											   delegate:self
+									  cancelButtonTitle:@"확인"
+									  otherButtonTitles:nil];
+	
+	v.tag = tag;
+	
+	[v show];
 }
+
 
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(alertView.tag == app_link_isp)
-    {
+	if(alertView.tag == app_link_isp)
+	{
         NSString* URLString = @"http://itunes.apple.com/kr/app/id369125087?mt=8";
-        NSURL* storeURL = [NSURL URLWithString:URLString];
-        [[UIApplication sharedApplication] openURL:storeURL];
-    }
-    else if(alertView.tag == app_link_bank)
-    {
-        NSString* URLString = @"http://itunes.apple.com/us/app/id398456030?mt=8";
-        NSURL* storeURL = [NSURL URLWithString:URLString];
-        [[UIApplication sharedApplication] openURL:storeURL];
+		NSURL* storeURL = [NSURL URLWithString:URLString];
+		[[UIApplication sharedApplication] openURL:storeURL];
+	}
+	else if(alertView.tag == app_link_bank)
+	{
+		NSString* URLString = @"http://itunes.apple.com/us/app/id398456030?mt=8";
+		NSURL* storeURL = [NSURL URLWithString:URLString];
+		[[UIApplication sharedApplication] openURL:storeURL];
         
-    }
-}
-
-
-
-
-@end
-
-@implementation MainCommandDelegate
-
-/* To override the methods, uncomment the line in the init function(s)
-   in MainViewController.m
- */
-
-#pragma mark CDVCommandDelegate implementation
-
-- (id)getCommandInstance:(NSString*)className
-{
-    return [super getCommandInstance:className];
-}
-
-- (NSString*)pathForResource:(NSString*)resourcepath
-{
-    return [super pathForResource:resourcepath];
-}
-
-@end
-
-@implementation MainCommandQueue
-
-/* To override, uncomment the line in the init function(s)
-   in MainViewController.m
- */
-- (BOOL)execute:(CDVInvokedUrlCommand*)command
-{
-    return [super execute:command];
+	}
 }
 
 @end

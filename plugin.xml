@@ -7,7 +7,7 @@
     version="0.0.1">
 
   <name>CordovaNicePlugin</name>
-	<author>East Sky Kang</author>
+	<author>Eastsky Kang</author>
 
 	<description>
 
@@ -32,22 +32,10 @@
 			</feature>
 		</config-file>
 
-		<source-file src="src/ios/AppDelegate+notification.m" />
-		<source-file src="src/ios/PushPlugin.m" />
+		<source-file src="src/ios/AppDelegate+NicePayment.m" />
+		<source-file src="src/ios/PaymentWebViewController.m" />
 
-		<header-file src="src/ios/AppDelegate+notification.h" />
-		<header-file src="src/ios/PushPlugin.h" />
-
+		<header-file src="src/ios/AppDelegate+NicePayment.h" />
+		<header-file src="src/ios/PaymentWebViewController.h" />
 	</platform>
-
-  	<!-- windows -->
-  	<platform name="windows">
-    	<js-module src="src/windows/PushPluginProxy.js" name="PushPlugin">
-    		<merges target="" />
-    	</js-module>
-    	<config-file target="config.xml" parent="/*">
-    		<preference name="WindowsToastCapable" value="true" />
-    	</config-file>
-	</platform>
-
 </plugin>
