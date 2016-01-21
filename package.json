@@ -1,6 +1,6 @@
 {
     "name": "cordova-nice-plugin",
-    "description": "Register and receive push notifications.",
+    "description": "Nice plugin for iOS application.",
     "version": "0.0.1",
     "homepage": "https://github.com/brant-hwang/cordova-nice-plugin#readme",
     "repository": {
