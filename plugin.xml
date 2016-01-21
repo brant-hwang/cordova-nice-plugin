@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    id="cordova-nice-plugin"
+    version="0.0.1">
+
+  <name>CordovaNicePlugin</name>
+	<author>East Sky Kang</author>
+
+	<description>
+
+	</description>
+
+	<license>MIT</license>
+
+	<js-module src="www/nice.js" name="NicePay">
+        <clobbers target="NicePay" />
+	</js-module>
+
+	<engines>
+		<engine name="cordova" version=">=3.0.0" />
+	</engines>
+
+	<!-- ios -->
+	<platform name="ios">
+
+		<config-file target="config.xml" parent="/*">
+			<feature name="NicePay">
+				<param name="ios-package" value="NicePay"/>
+			</feature>
+		</config-file>
+
+		<source-file src="src/ios/AppDelegate+notification.m" />
+		<source-file src="src/ios/PushPlugin.m" />
+
+		<header-file src="src/ios/AppDelegate+notification.h" />
+		<header-file src="src/ios/PushPlugin.h" />
+
+	</platform>
+
+  	<!-- windows -->
+  	<platform name="windows">
+    	<js-module src="src/windows/PushPluginProxy.js" name="PushPlugin">
+    		<merges target="" />
+    	</js-module>
+    	<config-file target="config.xml" parent="/*">
+    		<preference name="WindowsToastCapable" value="true" />
+    	</config-file>
+	</platform>
+
+</plugin>
