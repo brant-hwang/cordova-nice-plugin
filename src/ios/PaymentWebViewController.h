@@ -13,7 +13,13 @@
 
 @interface PaymentWebViewController : CDVViewController <UIAlertViewDelegate, WKNavigationDelegate>
 @property(nonatomic,retain)  NSString* bankPayUrlString;
-
 - (void) showAlertViewWithMessage:(NSString*)msg tagNum:(NSInteger)tag;
-
 @end
+
+
+@interface MainCommandDelegate : CDVCommandDelegateImpl
+@end
+
+@interface MainCommandQueue : CDVCommandQueue
+@end
+
