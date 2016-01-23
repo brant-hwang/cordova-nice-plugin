@@ -206,8 +206,6 @@ enum AppStoreLinkTag {
 
 @end
 
-@end
-
 @implementation MainCommandDelegate
 
 /* To override the methods, uncomment the line in the init function(s)
