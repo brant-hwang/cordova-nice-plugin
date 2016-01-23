@@ -17,9 +17,9 @@
 @end
 
 
-@interface MainCommandDelegate : CDVCommandDelegateImpl
+@interface PaymentCommandDelegate : CDVCommandDelegateImpl
 @end
 
-@interface MainCommandQueue : CDVCommandQueue
+@interface PaymentCommandQueue : CDVCommandQueue
 @end
 

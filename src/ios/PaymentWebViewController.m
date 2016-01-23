@@ -206,7 +206,7 @@ enum AppStoreLinkTag {
 
 @end
 
-@implementation MainCommandDelegate
+@implementation PaymentCommandDelegate
 
 /* To override the methods, uncomment the line in the init function(s)
    in MainViewController.m
@@ -226,7 +226,7 @@ enum AppStoreLinkTag {
 
 @end
 
-@implementation MainCommandQueue
+@implementation PaymentCommandQueue
 
 /* To override, uncomment the line in the init function(s)
    in MainViewController.m
