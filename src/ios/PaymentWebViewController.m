@@ -83,7 +83,7 @@ enum AppStoreLinkTag {
     //app store 로 연결하는 경우 앱스토어 APP을 열어 준다. (isp, bank app 이 설치하고자 경우)
     if(goAppStore || goAppStore2){
         [[UIApplication sharedApplication] openURL:request.URL];
-        return decisionHandler(NO);
+        return decisionHandler(WKNavigationActionPolicyCancel);
     }
 
     //isp App을 호출하는 경우
@@ -95,7 +95,7 @@ enum AppStoreLinkTag {
         else {    //설치 되어 있지 않다면 app store 연결
             [self showAlertViewWithMessage:@"모바일 ISP가 설치되어 있지 않아\nApp Store로 이동합니다."
                                     tagNum:app_link_isp];
-            return decisionHandler(NO);
+            return decisionHandler(WKNavigationActionPolicyCancel);
         }
 
     }
@@ -120,11 +120,28 @@ enum AppStoreLinkTag {
             //설치 되어 있지 않다면 app store 연결
             [self showAlertViewWithMessage:@"Bank Pay가 설치되어 있지 않아\nApp Store로 이동합니다."
                                     tagNum:app_link_bank];
-            return decisionHandler(NO);
+            return decisionHandler(WKNavigationActionPolicyCancel);
         }
     }
 
-    return decisionHandler(YES);
+    else if([URLString containsString:@"droidxantivirus"] ||
+            [URLString containsString:@"lottesmartpay"] ||
+            [URLString containsString:@"smshinhancardusim://"] ||
+            [URLString containsString:@"shinhan-sr-ansimclick"] ||
+            [URLString containsString:@"v3mobile"] ||
+            [URLString containsString:@"smartwall"] ||
+            [URLString containsString:@"appfree"] ||
+            [URLString containsString:@"ansimclick://"] ||
+            [URLString containsString:@"ansimclickscard"] ||
+            [URLString containsString:@"ansim://"] ||
+            [URLString containsString:@"mpocket"] ||
+            [URLString containsString:@"mvaccine"]) {
+
+            [[UIApplication sharedApplication] openURL:request.URL]; //설치 되어 있을 경우 App 호출
+            return decisionHandler(WKNavigationActionPolicyCancel);
+    }
+
+    return decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 #pragma mark UIWebDelegate implementation
