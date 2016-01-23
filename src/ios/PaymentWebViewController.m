@@ -41,7 +41,7 @@ enum AppStoreLinkTag {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
     [request setHTTPBody: [bodyString dataUsingEncoding: NSUTF8StringEncoding]];
-    [self.webView loadRequest: request];
+    //[self.webView loadRequest: request];
 }
 
 - (void) requesIspPayResult:(NSString*)urlString
@@ -49,7 +49,7 @@ enum AppStoreLinkTag {
     NSURL *url = [NSURL URLWithString: urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"GET"];
-    [self.webView loadRequest: request];
+    //[self.webView loadRequest: request];
 }
 
 #pragma mark View lifecycle
@@ -83,6 +83,7 @@ enum AppStoreLinkTag {
 
 #pragma mark UIWebDelegate implementation
 
+/*
 - (void)webViewDidFinishLoad:(UIWebView*)theWebView
 {
     // Black base color for background matches the native apps
@@ -90,9 +91,6 @@ enum AppStoreLinkTag {
     
     return [super webViewDidFinishLoad:theWebView];
 }
-
-/* Comment out the block below to over-ride */
-
 
 - (void) webViewDidStartLoad:(UIWebView*)theWebView
 {
@@ -103,6 +101,7 @@ enum AppStoreLinkTag {
 {
     return [super webView:theWebView didFailLoadWithError:error];
 }
+*/
 
 /*
  - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
@@ -113,6 +112,7 @@ enum AppStoreLinkTag {
  */
 
 
+/*
 - (BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     //현재 URL 을 읽음
@@ -169,7 +169,7 @@ enum AppStoreLinkTag {
     }
     return [ super webView:theWebView shouldStartLoadWithRequest:request navigationType:navigationType ];
 }
-
+*/
 
 - (void) showAlertViewWithMessage:(NSString*)msg tagNum:(NSInteger)tag
 {
