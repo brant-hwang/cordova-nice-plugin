@@ -29,6 +29,19 @@
 			</feature>
 		</config-file>
 
+
+		<config-file target="*-Info.plist" parent="/*">
+			<array>
+				<dict>
+					<key>LSApplicationQueriesSchemes</key>
+					<array>
+						<string>ispmobile</string>
+						<string>kftc-bankpay</string>
+					</array>
+				</dict>
+			</array>
+		</config-file>
+
 		<source-file src="src/ios/AppDelegate+NicePayment.m" />
 		<source-file src="src/ios/PaymentWebViewController.m" />
 
