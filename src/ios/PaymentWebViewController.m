@@ -97,7 +97,6 @@ enum AppStoreLinkTag {
                                     tagNum:app_link_isp];
             return decisionHandler(WKNavigationActionPolicyCancel);
         }
-
     }
 
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]initWithCapacity:10];
@@ -139,6 +138,33 @@ enum AppStoreLinkTag {
 
             [[UIApplication sharedApplication] openURL:request.URL]; //설치 되어 있을 경우 App 호출
             return decisionHandler(WKNavigationActionPolicyCancel);
+    }
+
+    else if([URLString hasPrefix:@"gajago://"]) {
+
+        if([URLString hasPrefix:@"gajago://orderComplete"]) {
+            NSString *baseDir = [[NSBundle mainBundle] resourcePath];
+
+            NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
+            NSArray *urlComponents = [url.query componentsSeparatedByString:@"&"];
+
+            for (NSString *keyValuePair in urlComponents)
+            {
+                NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
+                NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
+                NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
+
+                [queryStringDictionary setObject:value forKey:key];
+            }
+
+            NSString *completeUrl = [NSString stringWithFormat:@"file://%@/www/pages/order/order-cplt.html?orderId=%@", baseDir, [queryStringDictionary objectForKey:@"id"]];
+
+            NSString* webStringURL = [completeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSURL* url = [NSURL URLWithString:webStringURL];
+
+            NSURLRequest *request = [[NSURLRequest alloc]initWithURL: url];
+            [self.webViewEngine loadRequest:request];
+        }
     }
 
     return decisionHandler(WKNavigationActionPolicyAllow);
