@@ -29,8 +29,7 @@
             </feature>
         </config-file>
 
-        <config-file target="*-Info.plist" parent="/*">
-            <key>LSApplicationQueriesSchemes</key>
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
             <array>
                 <string>ispmobile</string>
                 <string>kftc-bankpay</string>
