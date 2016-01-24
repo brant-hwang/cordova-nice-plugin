@@ -38,7 +38,7 @@ enum AppStoreLinkTag {
     [self.webViewEngine loadRequest:request];
 }
 
-- (void) requesIspPayResult:(NSString*)urlString
+- (void) requestIspPayResult:(NSString*)urlString
 {
     NSURL *url = [NSURL URLWithString: urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];

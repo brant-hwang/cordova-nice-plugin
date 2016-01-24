@@ -69,23 +69,25 @@
     NSString* URLkeyString = [NSString stringWithString:[url absoluteString]];
     NSLog(@"URLkey : %@",URLkeyString);
     
-#define MY_APP_URL_KEY  @"gajago://"
+#define MY_APP_URL_KEY  @"nicepaysample://"
     //scheme 를 통한 호출 여부
     if(URLkeyString !=  nil)
     {
         if([URLkeyString hasPrefix:MY_APP_URL_KEY])
         {
-            
+
+            PaymentWebViewController *paymentWebViewController = ((PaymentWebViewController*)self.viewController);
+
             NSRange range = [URLkeyString rangeOfString:@"?bankpaycode"];    //계좌이체 인경우
             if(range.location != NSNotFound) { //계좌이체 인증 후 거래 진행
-                
+
                 //[MY_APP_URL_KEY length]+1 => 계좌이체인 경우  scheme + ? 로 리던 되어 "?" 도 함께 삭제 함.
                 //nicepaysample://?bankpaycode=xxxx ...." 에서 "bankpaycode=xxxx ...." 추출하기 위함
                 URLkeyString = [URLkeyString substringFromIndex:[MY_APP_URL_KEY length]+1];
-//                [self.webViewController requestBankPayResult:URLkeyString];
+                [paymentWebViewController requestBankPayResult:URLkeyString];
                 return;
             }
-            
+
             //결제 요청 필드 내
             range = [URLkeyString rangeOfString:@"ISPCancel"];
             if(range.location != NSNotFound) { //ISP 취소인 경우
@@ -97,14 +99,15 @@
                 [alertView show];
                 return;
             }
-            
+
             range = [URLkeyString rangeOfString:@"ispResult.jsp"];
             if(range.location != NSNotFound) { //ISP 인증 후 결제 진행
                 //[MY_APP_URL_KEY length]+3 => ISP 경우  scheme + :// 로 리턴 되어 "://" 도 함께 삭제 함.
                 //  nicepaysample://://http://web.nicepay.co.kr/smart/card/isp/ .... ispResult.jsp 에서
                 // http://web.nicepay.co.kr/smart/card/isp/.... ispResult.jsp" 추출하기 위함
                 URLkeyString = [URLkeyString substringFromIndex:[MY_APP_URL_KEY length]+3];
-//                [self.webViewController requesIspPayResult:URLkeyString];
+
+                [paymentWebViewController requestIspPayResult:URLkeyString];
                 return;
             }
         }
