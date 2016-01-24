@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-    id="cordova-nice-plugin"
-    version="0.0.1">
+        id="cordova-nice-plugin"
+        version="0.0.1">
 
-  <name>CordovaNicePlugin</name>
-	<author>Eastsky Kang</author>
+    <name>CordovaNicePlugin</name>
+    <author>Eastsky Kang</author>
 
-	<description>
-		Nice plugin for iOS application.
-	</description>
+    <description>
+        Nice plugin for iOS application.
+    </description>
 
-	<license>MIT</license>
+    <license>MIT</license>
 
-	<js-module src="www/nice.js" name="NicePay">
-        <clobbers target="NicePay" />
-	</js-module>
+    <js-module src="www/nice.js" name="NicePay">
+        <clobbers target="NicePay"/>
+    </js-module>
 
-	<engines>
-		<engine name="cordova" version=">=3.0.0" />
-	</engines>
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
 
-	<!-- ios -->
-	<platform name="ios">
+    <!-- ios -->
+    <platform name="ios">
 
-		<config-file target="config.xml" parent="/*">
-			<feature name="NicePay">
-				<param name="ios-package" value="NicePay"/>
-			</feature>
-		</config-file>
+        <config-file target="config.xml" parent="/*">
+            <feature name="NicePay">
+                <param name="ios-package" value="NicePay"/>
+            </feature>
+        </config-file>
 
 
-		<config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
-			<array>
-				<dict>
-					<key>LSApplicationQueriesSchemes</key>
-					<array>
-						<string>ispmobile</string>
-						<string>kftc-bankpay</string>
-					</array>
-				</dict>
-			</array>
-		</config-file>
+        <config-file target="*-Info.plist" parent="">
+            <key>LSApplicationQueriesSchemes</key>
+            <array>
+                <string>ispmobile</string>
+                <string>kftc-bankpay</string>
+            </array>
+        </config-file>
 
-		<source-file src="src/ios/AppDelegate+NicePayment.m" />
-		<source-file src="src/ios/PaymentWebViewController.m" />
+        <source-file src="src/ios/AppDelegate+NicePayment.m"/>
+        <source-file src="src/ios/PaymentWebViewController.m"/>
 
-		<header-file src="src/ios/AppDelegate+NicePayment.h" />
-		<header-file src="src/ios/PaymentWebViewController.h" />
-	</platform>
+        <header-file src="src/ios/AppDelegate+NicePayment.h"/>
+        <header-file src="src/ios/PaymentWebViewController.h"/>
+    </platform>
 </plugin>
