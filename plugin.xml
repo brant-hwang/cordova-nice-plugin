@@ -29,6 +29,10 @@
             </feature>
         </config-file>
 
+        <config-file target="*-Info.plist" parent="CFBundleDisplayName">
+            <string>가자고</string>
+        </config-file>
+
         <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
             <array>
                 <string>ispmobile</string>
