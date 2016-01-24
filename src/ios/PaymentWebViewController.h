@@ -15,7 +15,7 @@
 @property(nonatomic,retain)  NSString* bankPayUrlString;
 - (void) showAlertViewWithMessage:(NSString*)msg tagNum:(NSInteger)tag;
 - (void) requestBankPayResult:(NSString*)bodyString;
-- (void) requestIspPayResult:(NSString*)urlString;
+- (void) requestIspPayResult:(NSURL*)url;
 @end
 
 @interface PaymentCommandDelegate : CDVCommandDelegateImpl

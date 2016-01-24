@@ -38,11 +38,26 @@ enum AppStoreLinkTag {
     [self.webViewEngine loadRequest:request];
 }
 
-- (void) requestIspPayResult:(NSString*)urlString
-{
-    NSURL *url = [NSURL URLWithString: urlString];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
-    [request setHTTPMethod: @"GET"];
+- (void) requestIspPayResult:(NSURL*)url {
+    NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
+    NSArray *urlComponents = [url.query componentsSeparatedByString:@"&"];
+
+    for (NSString *keyValuePair in urlComponents)
+    {
+        NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
+        NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
+        NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
+
+        [queryStringDictionary setObject:value forKey:key];
+    }
+
+    NSString *baseDir = [[NSBundle mainBundle] resourcePath];
+    NSString *completeUrl = [NSString stringWithFormat:@"file://%@/www/pages/order/order-cplt.html?orderId=%@", baseDir, [queryStringDictionary objectForKey:@"id"]];
+
+    NSString* webStringURL = [completeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL: [NSURL URLWithString:webStringURL]];
+
     [self.webViewEngine loadRequest:request];
 }
 

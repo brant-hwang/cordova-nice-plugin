@@ -102,12 +102,9 @@
 
             range = [URLkeyString rangeOfString:@"ispResult.jsp"];
             if(range.location != NSNotFound) { //ISP 인증 후 결제 진행
-                //[MY_APP_URL_KEY length]+3 => ISP 경우  scheme + :// 로 리턴 되어 "://" 도 함께 삭제 함.
-                //  nicepaysample://://http://web.nicepay.co.kr/smart/card/isp/ .... ispResult.jsp 에서
-                // http://web.nicepay.co.kr/smart/card/isp/.... ispResult.jsp" 추출하기 위함
                 URLkeyString = [URLkeyString substringFromIndex:[MY_APP_URL_KEY length]+3];
 
-                [paymentWebViewController requestIspPayResult:URLkeyString];
+                [paymentWebViewController requestIspPayResult:url];
                 return;
             }
         }
