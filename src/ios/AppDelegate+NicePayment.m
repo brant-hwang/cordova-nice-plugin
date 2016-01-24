@@ -69,7 +69,7 @@
     NSString* URLkeyString = [NSString stringWithString:[url absoluteString]];
     NSLog(@"URLkey : %@",URLkeyString);
     
-#define MY_APP_URL_KEY  @"nicepaysample://"
+#define MY_APP_URL_KEY  @"gajago://"
     //scheme 를 통한 호출 여부
     if(URLkeyString !=  nil)
     {
