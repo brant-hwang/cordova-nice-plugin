@@ -19,32 +19,31 @@
 {
     [[NSHTTPCookieStorage sharedHTTPCookieStorage]
      setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-    
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    
+
 #if __has_feature(objc_arc)
     self.window = [[UIWindow alloc] initWithFrame:screenBounds];
 #else
     self.window = [[[UIWindow alloc] initWithFrame:screenBounds] autorelease];
 #endif
     self.window.autoresizesSubviews = YES;
-    
+
 #if __has_feature(objc_arc)
     self.viewController = [[PaymentWebViewController alloc] init];
 #else
     self.viewController = [[[PaymentWebViewController alloc] init] autorelease];
 #endif
-    
+
     // Set your app's start page by setting the <content src='foo.html' /> tag in config.xml.
     // If necessary, uncomment the line below to override it.
     // self.viewController.startPage = @"index.html";
-    
+
     // NOTE: To customize the view's frame size (which defaults to full screen), override
     // [self.viewController viewWillAppear:] in your view controller.
-    
+
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
 
@@ -68,7 +67,7 @@
 {
     NSString* URLkeyString = [NSString stringWithString:[url absoluteString]];
     NSLog(@"URLkey : %@",URLkeyString);
-    
+
 #define MY_APP_URL_KEY  @"gajago://"
     //scheme 를 통한 호출 여부
     if(URLkeyString !=  nil)
@@ -102,9 +101,8 @@
 
             range = [URLkeyString rangeOfString:@"ispResult.jsp"];
             if(range.location != NSNotFound) { //ISP 인증 후 결제 진행
-                URLkeyString = [URLkeyString substringFromIndex:[MY_APP_URL_KEY length]+3];
-
-                [paymentWebViewController requestIspPayResult:url];
+                NSRange http = [URLkeyString rangeOfString:@"://http"];
+                [paymentWebViewController requestIspPayResult:[NSURL URLWithString:[URLkeyString substringToIndex:http.location]]];
                 return;
             }
         }
