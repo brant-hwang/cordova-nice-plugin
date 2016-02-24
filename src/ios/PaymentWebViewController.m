@@ -9,6 +9,9 @@
 #import "PaymentWebViewController.h"
 #import "AppDelegate.h"
 
+// iOS의 content src는 localhost:8371 로 설정
+#define CONTENT_SRC @"http://localhost:8371"
+
 @implementation PaymentWebViewController
 @synthesize bankPayUrlString;
 
@@ -158,7 +161,7 @@ enum AppStoreLinkTag {
     else if([URLString hasPrefix:@"gajago://"]) {
 
         if([URLString hasPrefix:@"gajago://orderComplete"]) {
-            NSString *baseDir = [[NSBundle mainBundle] resourcePath];
+            // NSString *baseDir = [[NSBundle mainBundle] resourcePath];
 
             NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
             NSArray *urlComponents = [url.query componentsSeparatedByString:@"&"];
@@ -172,7 +175,7 @@ enum AppStoreLinkTag {
                 [queryStringDictionary setObject:value forKey:key];
             }
 
-            NSString *completeUrl = [NSString stringWithFormat:@"file://%@/www/pages/order/order-cplt.html?orderId=%@", baseDir, [queryStringDictionary objectForKey:@"id"]];
+            NSString *completeUrl = [NSString stringWithFormat:@"%@/www/pages/order/order-cplt.html?orderId=%@", CONTENT_SRC, [queryStringDictionary objectForKey:@"id"]];
 
             NSString* webStringURL = [completeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             NSURL* url = [NSURL URLWithString:webStringURL];
