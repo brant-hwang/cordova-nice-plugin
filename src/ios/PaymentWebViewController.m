@@ -42,26 +42,32 @@ enum AppStoreLinkTag {
 }
 
 - (void) requestIspPayResult:(NSURL*)url {
-    NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
-    NSArray *urlComponents = [url.query componentsSeparatedByString:@"&"];
-
-    for (NSString *keyValuePair in urlComponents)
-    {
-        NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
-        NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
-        NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
-
-        [queryStringDictionary setObject:value forKey:key];
-    }
-
-    NSString *baseDir = [[NSBundle mainBundle] resourcePath];
-    NSString *completeUrl = [NSString stringWithFormat:@"file://%@/www/pages/order/order-cplt.html?orderId=%@", baseDir, [queryStringDictionary objectForKey:@"id"]];
-
-    NSString* webStringURL = [completeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-    NSURLRequest *request = [[NSURLRequest alloc]initWithURL: [NSURL URLWithString:webStringURL]];
-
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
+    [request setHTTPMethod: @"GET"];
     [self.webViewEngine loadRequest:request];
+
+    // 이하 코드는 잘못된 걸로 추정됨 (?)
+    // NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
+    // NSArray *urlComponents = [url.query componentsSeparatedByString:@"&"];
+
+    // for (NSString *keyValuePair in urlComponents)
+    // {
+    //     NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
+    //     NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
+    //     NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
+
+    //     [queryStringDictionary setObject:value forKey:key];
+    // }
+
+    // NSString *baseDir = [[NSBundle mainBundle] resourcePath];
+    // NSString *completeUrl = [NSString stringWithFormat:@"file://%@/www/pages/order/order-cplt.html?orderId=%@", baseDir, [queryStringDictionary objectForKey:@"id"]];
+
+    // NSString* webStringURL = [completeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    // NSURLRequest *request = [[NSURLRequest alloc]initWithURL: [NSURL URLWithString:webStringURL]];
+
+    // [self.webViewEngine loadRequest:request];
 }
 
 #pragma mark View lifecycle

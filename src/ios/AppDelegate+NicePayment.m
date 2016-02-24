@@ -102,7 +102,8 @@
             range = [URLkeyString rangeOfString:@"ispResult.jsp"];
             if(range.location != NSNotFound) { //ISP 인증 후 결제 진행
                 NSRange http = [URLkeyString rangeOfString:@"://http"];
-                [paymentWebViewController requestIspPayResult:[NSURL URLWithString:[URLkeyString substringToIndex:http.location]]];
+                // [paymentWebViewController requestIspPayResult:[NSURL URLWithString:[URLkeyString substringToIndex:http.location]]];
+                [paymentWebViewController requestIspPayResult:[NSURL URLWithString:[URLkeyString substringFromIndex:http.location + 3]]];             
                 return;
             }
         }
